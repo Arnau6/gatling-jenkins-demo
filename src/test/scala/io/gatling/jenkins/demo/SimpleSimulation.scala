@@ -8,7 +8,7 @@ class SimpleSimulation extends Simulation {
   val httpProtocol =
     http.baseURL("http://computer-database.gatling.io")
 
-  val scn = scenario("Simple")
+val scn = scenario("Simple")
     .exec(
       http("Home").get("/"))
 
@@ -16,5 +16,6 @@ class SimpleSimulation extends Simulation {
     scn.inject(
       atOnceUsers(1)))
     .protocols(httpProtocol)
-    .assertions(global.failedRequests.count.is(0))
+.assertions(global.responseTime.max.lessThan(10))
+
 }
